@@ -3,219 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
+<title>Happy Valentine's Day 💕</title>
 
 <style>
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    color:#5a2a3a;
-    overflow:hidden;
-    background: linear-gradient(135deg, #ffd6e8, #ffc2dd, #ffe6f2);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-}
-
-@keyframes gradientMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-.wrapper{
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #f8cdda, #f5b6c4);
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
-    position:relative;
 }
 
 .card{
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(20px);
-    padding:50px;
+    background:#f3dbe2;
+    padding:40px;
     border-radius:25px;
-    width:90%;
-    max-width:600px;
     text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,0.15);
-    position:relative;
-    z-index:2;
+    width:350px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-input{
-    padding:12px 20px;
-    border-radius:30px;
-    border:1px solid #ff9ecb;
-    margin-top:15px;
-    text-align:center;
+h1{
+    color:#7a3e4d;
+}
+
+p{
+    color:#7a3e4d;
+}
+
+.love-img{
+    width:200px;
+    border-radius:20px;
+    margin:20px 0;
 }
 
 button{
     padding:12px 25px;
-    border-radius:30px;
     border:none;
-    margin:10px;
-    cursor:pointer;
-    background:#ff9ecb;
+    border-radius:30px;
+    background:#f48fb1;
     color:white;
-    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    margin:10px 0;
     transition:0.3s;
 }
 
 button:hover{
-    background:#ff6fa5;
-    transform:scale(1.05);
+    background:#ec407a;
 }
 
-.hidden{ display:none; }
-.section{ margin-top:25px; }
-
-.love-img{
-    width:220px;
-    border-radius:20px;
+#counter{
     margin-top:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* 💖 หัวใจลอย */
-.heart{
-    position:absolute;
-    color:#ff4d88;
-    animation: floatUp 4s linear infinite;
-}
-
-@keyframes floatUp{
-    0%{
-        transform:translateY(0) scale(1);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-800px) scale(1.5);
-        opacity:0;
-    }
+    font-size:20px;
+    font-weight:bold;
+    color:#7a3e4d;
 }
 </style>
 </head>
+
 <body>
 
-<div class="wrapper">
-
-<div class="card" id="loginPage">
-    <h1>🔐 ใส่รหัสค้าบบ</h1>
-    <input type="password" id="password" placeholder="วันสำคัญของเรา">
-    <br>
-    <button onclick="checkPassword()">กดเลยไอ่ตุ้ย ❤️</button>
-    <p id="error"></p>
-</div>
-
-<div class="card hidden" id="mainPage">
-
+<div class="card">
     <h1>Happy Valentine's Day 💕</h1>
-    <p>รักตุ้ยน้าารักที่สุดในโลกเยยย❤️</p>
+    <p>รักตูน่ารักที่สุดในโลกเยย ❤️</p>
 
-    <div class="section">
-        <img src="123.jpg" class="love-img">
-    </div>
+    <img src="123.jpg" class="love-img">
 
-    <!-- 🎵 เพลง -->
-    <audio id="bgMusic" src="mp3.mp3" loop></audio>
+    <!-- เพลง -->
+    <audio id="bgMusic" loop>
+        <source src="mp3.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="section">
-        <button onclick="toggleMusic()" id="musicBtn">▶ เปิดเพลง 💕</button>
-    </div>
+    <button onclick="toggleMusic()" id="musicBtn">▶️ เปิดเพลง 💕</button>
 
-    <div class="section">
-        <h2 id="counter"></h2>
-    </div>
+    <h2 id="counter"></h2>
 
-    <div class="section">
-        <button onclick="randomLove()">ตุ้ยกดตรงนี้เร็ว 💌</button>
-        <p id="loveText"></p>
-    </div>
+    <button onclick="randomLove()">สุ่มคำหวาน 💌</button>
+    <p id="loveText"></p>
 
-    <div class="section">
-        <button onclick="showSecret()">อ่านๆให้ชื่นจัยย🫶</button>
-        <p id="secretText"></p>
-    </div>
-
-</div>
-
+    <button onclick="showSecret()">อ่านข้อความลับ 🤫</button>
+    <p id="secretText"></p>
 </div>
 
 <script>
+// นับวันคบกัน (แก้วันที่ตรงนี้ได้)
+const startDate = new Date("2025-03-17");
 
-function checkPassword(){
-    const correctPassword = "4317";
-    const input = document.getElementById("password").value;
-
-    if(input === correctPassword){
-        document.getElementById("loginPage").classList.add("hidden");
-        document.getElementById("mainPage").classList.remove("hidden");
-        startCounter();
-        startHearts();
-    }else{
-        document.getElementById("error").innerText="รหัสผิดโว้ยไอ่ตุ้ยคิดดีๆ 💭";
-    }
-}
-
-function startCounter(){
-    const startDate = new Date("2025-03-17");
+function updateCounter(){
     const today = new Date();
     const diffTime = today - startDate;
-    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     document.getElementById("counter").innerText =
-    "เป็นแฟนกันมา " + days + " วันแน้วว ❤️";
+        "เป็นแฟนกันมา " + diffDays + " วันแล้ว 💖";
 }
+updateCounter();
 
-const messages = [
-"คิดถึงอ่าาา 🥺",
-"ตุ้ยรักเค้ามั้ย 💕",
-"ขอบคุณที่อยู่กับเค้าน้าา",
-"อยากกอดตุ้ยแล้วว ❤️",
-"รักตุ้ยนะจุ๊บๆ"
-];
-
-function randomLove(){
-    const randomIndex = Math.floor(Math.random()*messages.length);
-    document.getElementById("loveText").innerText =
-    messages[randomIndex];
-}
-
-function showSecret(){
-    document.getElementById("secretText").innerText =
-    "ไว้เค้าไปหาจะหอมแจ้มให้ชื่นจัยเลย❤️";
-}
-
-/* 🎵 ปุ่มเปิดปิดเพลง */
-function toggleMusic(){
+// ปุ่มเพลง (รองรับมือถือ)
+function toggleMusic() {
     const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicBtn");
 
-    if(music.paused){
-        music.play();
-        btn.innerText = "⏸ ปิดเพลง 💕";
-    }else{
+    if (music.paused) {
+        music.play().then(() => {
+            btn.innerHTML = "⏸️ ปิดเพลง 💕";
+        }).catch(() => {
+            alert("แตะหน้าจอก่อน แล้วกดใหม่อีกครั้ง 💖");
+        });
+    } else {
         music.pause();
-        btn.innerText = "▶ เปิดเพลง 💕";
+        btn.innerHTML = "▶️ เปิดเพลง 💕";
     }
 }
 
-/* 💖 หัวใจลอย */
-function startHearts(){
-    setInterval(()=>{
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML="💖";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.bottom="0";
-        heart.style.fontSize=(Math.random()*20+15)+"px";
-        document.body.appendChild(heart);
+// สุ่มคำหวาน
+const loveMessages = [
+    "รักที่สุดในจักรวาล 💕",
+    "อยู่ด้วยแล้วมีความสุขที่สุด 💖",
+    "ขอบคุณที่เข้ามาในชีวิตนะ 🥰",
+    "อยากอยู่ด้วยกันไปนาน ๆ เลย 💞"
+];
 
-        setTimeout(()=>{ heart.remove(); },4000);
-    },300);
+function randomLove(){
+    const random = loveMessages[Math.floor(Math.random()*loveMessages.length)];
+    document.getElementById("loveText").innerText = random;
 }
 
+// ข้อความลับ
+function showSecret(){
+    document.getElementById("secretText").innerText =
+        "จริง ๆ แล้วเค้ารักเธอมากกว่าที่พูดทุกวันอีกนะ 💘";
+}
 </script>
 
 </body>
